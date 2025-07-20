@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SponsorSync - Smart Matchmaking Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow-md fixed w-full z-30">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div id="logo" class="text-indigo-700 font-bold text-2xl cursor-pointer select-none">SponsorSync</div>
+      <div class="flex items-center space-x-6">
+        <button id="organizer-btn" aria-label="Organizer" class="nav-button flex items-center space-x-1 text-gray-700 hover:text-indigo-700 focus:outline-none cursor-pointer">
+          <span class="material-icons">group</span>
+          <span class="hidden sm:inline">Organizer</span>
+        </button>
+        <button id="sponsor-btn" aria-label="Sponsor" class="nav-button flex items-center space-x-1 text-gray-700 hover:text-indigo-700 focus:outline-none cursor-pointer">
+          <span class="material-icons">business</span>
+          <span class="hidden sm:inline">Sponsor</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <!-- ADDED: 'animated-gradient' class for the background effect -->
+  <section class="pt-24 pb-16 bg-white animated-gradient relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col-reverse lg:flex-row items-center gap-12 relative z-10">
+      <div class="lg:w-1/2">
+        <!-- ADDED: 'animate-on-load' classes for initial animation -->
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-6 animate-on-load">
+          Bridging Student Organizers and Sponsors
+        </h1>
+        <p class="text-lg text-gray-700 mb-6 animate-on-load">
+          Student organizers struggle to find the right sponsors, and sponsors often fail to discover relevant, high-engagement student events.
+          SponsorSync is a smart platform where student clubs create sponsor-ready event profiles — including audience size, themes, past engagement, and reach.
+          Sponsors can filter opportunities based on their industry, target demographic, and marketing goals.
+        </p>
+        <div class="flex space-x-4 animate-on-load">
+        </div>
+      </div>
+      <div class="lg:w-1/2">
+        <!-- ADDED: 'animate-on-load' class for the image -->
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Student event" class="rounded-lg shadow-lg animate-on-load" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="bg-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+      <!-- ADDED: 'animate-on-scroll' and 'feature-card' classes to each feature div -->
+      <div class="feature-card animate-on-scroll">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Create Event Profiles" class="mx-auto mb-4 rounded-lg shadow-md" />
+        <h3 class="text-xl font-semibold mb-2">Create Sponsor-Ready Event Profiles</h3>
+        <p class="text-gray-700">Easily create detailed event profiles showcasing audience size, themes, past engagement, and reach to attract sponsors.</p>
+      </div>
+      <div class="feature-card animate-on-scroll">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Discover Opportunities" class="mx-auto mb-4 rounded-lg shadow-md" />
+        <h3 class="text-xl font-semibold mb-2">Discover Relevant Sponsorship Opportunities</h3>
+        <p class="text-gray-700">Sponsors can filter and find events that match their industry, target demographic, and marketing goals.</p>
+      </div>
+      <div class="feature-card animate-on-scroll">
+        <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&w=400&q=80" alt="Engage and Connect" class="mx-auto mb-4 rounded-lg shadow-md" />
+        <h3 class="text-xl font-semibold mb-2">Engage and Connect</h3>
+        <p class="text-gray-700">Facilitate meaningful connections between student organizers and sponsors for successful event partnerships.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login Modal -->
+  <!-- REMOVED: 'hidden' class. We will control visibility with CSS/JS -->
+  
+  <!-- Signup Modal -->
+  <!-- REMOVED: 'hidden' class. We will control visibility with CSS/JS -->
+  
+  <!-- Event Creation Modal -->
+  <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+      <button id="close-modal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none">
+        <span class="material-icons">close</span>
+      </button>
+      <h2 class="text-2xl font-bold mb-4">Create / Edit Event</h2>
+      <form id="event-form" class="space-y-4">
+        <div>
+          <label for="event-title" class="block text-sm font-semibold mb-1">Event Title</label>
+          <input type="text" id="event-title" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="event-date" class="block text-sm font-semibold mb-1">Date</label>
+          <input type="date" id="event-date" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="event-location" class="block text-sm font-semibold mb-1">Location</label>
+          <input type="text" id="event-location" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="audience-type" class="block text-sm font-semibold mb-1">Audience Type</label>
+          <input type="text" id="audience-type" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="audience-size" class="block text-sm font-semibold mb-1">Audience Size</label>
+          <input type="number" id="audience-size" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="sponsorship" class="block text-sm font-semibold mb-1">Sponsorship Requirements</label>
+          <textarea id="sponsorship" class="w-full border border-gray-300 rounded px-3 py-2" rows="3"></textarea>
+        </div>
+        <div>
+          <label for="description" class="block text-sm font-semibold mb-1">Description</label>
+          <textarea id="description" class="w-full border border-gray-300 rounded px-3 py-2" rows="3"></textarea>
+        </div>
+        <div>
+          <label for="image-url" class="block text-sm font-semibold mb-1">Image URL</label>
+          <input type="url" id="image-url" class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="tags" class="block text-sm font-semibold mb-1">Tags (comma separated)</label>
+          <input type="text" id="tags" class="w-full border border-gray-300 rounded px-3 py-2" placeholder="e.g. Tech, AI, Innovation" />
+        </div>
+        <button type="submit" class="cta-button bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="landing.js"></script>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t mt-16">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm">
+      <div class="mb-4 md:mb-0">&copy; 2025 SponsorSync. All rights reserved.</div>
+      <div class="flex space-x-6">
+        <a href="#" class="hover:text-indigo-700">Privacy Policy</a>
+        <a href="#" class="hover:text-indigo-700">Terms of Service</a>
+        <a href="#" class="hover:text-indigo-700">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

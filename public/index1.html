@@ -1,0 +1,83 @@
+<!-- index1.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SponsorSync - Sponsor Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="hidden lg:flex flex-col w-64 bg-white border-r">
+             <div class="flex items-center justify-center h-16 border-b">
+                <span class="text-indigo-600 font-bold text-xl">SponsorSync</span>
+            </div>
+            <div class="flex-grow p-4">
+                <nav class="flex flex-col gap-2">
+                    <a href="#" class="sidebar-link active">
+                        <span class="material-icons">dashboard</span> Dashboard
+                    </a>
+                    <a href="#" class="sidebar-link">
+                        <span class="material-icons">explore</span> Discover Events
+                    </a>
+                    <a href="#" class="sidebar-link">
+                        <span class="material-icons">bookmark_border</span> Saved Events
+                    </a>
+                    <a href="#" class="sidebar-link">
+                        <span class="material-icons">business_center</span> My Sponsorships
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex items-center justify-between h-16 bg-white border-b px-6">
+                 <button id="mobile-sidebar-toggle" class="lg:hidden text-gray-600">
+                    <span class="material-icons">menu</span>
+                </button>
+                <div class="flex items-center gap-4">
+                    <h1 class="text-lg font-semibold text-gray-800">Discover Events</h1>
+                </div>
+                <!-- Profile Dropdown can go here -->
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-6">
+                <!-- Event Grid -->
+                <div id="event-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- JS will populate this section -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="event-modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+    <div id="event-modal" class="fixed inset-0 flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg transform transition-all">
+            <div class="flex justify-between items-center p-5 border-b">
+                <h3 id="modal-title" class="text-xl font-semibold text-gray-900">Event Details</h3>
+                <button id="close-modal-button" class="text-gray-400 hover:text-gray-600">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div id="modal-content-area" class="p-6">
+                <!-- Modal content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30 lg:hidden"></div>
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-white z-40 transform -translate-x-full transition-transform lg:hidden">
+        <!-- Sidebar content duplicated for mobile -->
+    </div>
+
+
+    <script src="app1.js"></script>
+</body>
+</html>

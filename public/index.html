@@ -1,0 +1,147 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SponsorSync - Organizer Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar -->
+        <div class="hidden md:flex flex-col w-64 bg-white">
+            <div class="flex items-center justify-center h-16 bg-white border-b">
+                <span class="text-indigo-600 font-bold text-xl">SponsorSync</span>
+            </div>
+            <div class="flex flex-col flex-grow p-4">
+                <nav class="flex flex-col flex-grow gap-2">
+                    <a href="#" class="sidebar-link active">
+                        <span class="material-icons">dashboard</span> Dashboard
+                    </a>
+                    <a href="#" id="open-modal-sidebar" class="sidebar-link">
+                        <span class="material-icons">add_circle_outline</span> Create New Event
+                    </a>
+                    <a href="#" class="sidebar-link">
+                        <span class="material-icons">event</span> My Events
+                    </a>
+                    <a href="#" class="sidebar-link">
+                        <span class="material-icons">message</span> Messages
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-grow">
+            <header class="flex items-center justify-between h-16 bg-white border-b px-6">
+                 <button id="mobile-nav-toggle" class="md:hidden text-gray-600">
+                    <span class="material-icons">menu</span>
+                </button>
+                <h1 class="text-lg font-semibold text-gray-800">Dashboard</h1>
+                <button id="open-modal" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-indigo-700 transition">Create New Event</button>
+            </header>
+            <main class="flex-grow p-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Your Events</h2>
+                    <p class="text-gray-600 mb-6">Create and manage event profiles visible to sponsors.</p>
+                    
+                    <!-- Filter Section -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <input type="text" id="filter-keyword" placeholder="Filter by event name..." class="w-full md:w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <select id="filter-status" class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="all">All Statuses</option>
+                                <option value="draft">Draft</option>
+                                <option value="pending">Pending</option>
+                                <option value="matched">Matched</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Name</th>
+                                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Audience Size</th>
+                                    <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="py-3 px-6 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="event-table-body" class="divide-y divide-gray-200">
+                                <!-- JS will populate this -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+    <div id="modal" class="fixed inset-0 flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl transform transition-all">
+            <div class="flex justify-between items-center p-6 border-b">
+                <h3 class="text-xl font-semibold text-gray-900">Create New Event</h3>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <form id="event-form" class="p-6 space-y-4">
+                <!-- Form fields remain the same -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="event-title" class="block text-sm font-medium text-gray-700">Event Title</label>
+                        <input type="text" id="event-title" name="title" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div>
+                        <label for="event-date" class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date" id="event-date" name="date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="event-location" class="block text-sm font-medium text-gray-700">Location</label>
+                    <input type="text" id="event-location" name="location" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="audience-type" class="block text-sm font-medium text-gray-700">Audience Type</label>
+                        <select id="audience-type" name="audience" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <option>Students</option>
+                            <option>Alumni</option>
+                            <option>Faculty</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="audience-size" class="block text-sm font-medium text-gray-700">Audience Size</label>
+                        <input type="number" id="audience-size" name="audienceSize" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="sponsorship-requirements" class="block text-sm font-medium text-gray-700">Sponsorship Requirements</label>
+                    <input type="text" id="sponsorship-requirements" name="sponsorship" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="e.g., Booth space, logo on banner">
+                </div>
+                <div>
+                    <label for="event-image" class="block text-sm font-medium text-gray-700">Upload Image</label>
+                    <input type="file" id="event-image" name="image" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                </div>
+                <div>
+                    <label for="event-description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea id="event-description" name="description" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
+                </div>
+                <div class="flex justify-end pt-4">
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition">Submit Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
+
